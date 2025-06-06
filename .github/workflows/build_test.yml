@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  unit_tests:
+  integration_tests:
 
     runs-on: ubuntu-latest
 
@@ -29,7 +29,7 @@ jobs:
       run: npm test
 
   security_tests:
-    needs: unit_tests	
+    needs: integration_tests	
     runs-on: ubuntu-latest
     
     strategy:
