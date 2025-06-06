@@ -7,14 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  unit_tests:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Checkout the repository
@@ -28,5 +27,15 @@ jobs:
       run: npm ci
     - name: Run tests
       run: npm test
+
+  security_tests:
+    needs: unit_tests	
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    
+    steps:
     - name: Run security tests
       run: npm audit
